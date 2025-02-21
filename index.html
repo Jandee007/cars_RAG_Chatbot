@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Guru</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #007bff, #6610f2);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            text-align: center;
+            width: 400px;
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        h1 {
+            font-size: 26px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        p {
+            color: #666;
+            font-size: 16px;
+        }
+        input {
+            width: 85%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            margin-top: 15px;
+            margin-bottom: 20px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        input:focus {
+            border-color: #007bff;
+        }
+        button {
+            padding: 12px 20px;
+            font-size: 16px;
+            background: linear-gradient(90deg, #007bff, #6610f2);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.3s;
+        }
+        button:hover {
+            transform: scale(1.05);
+            background: linear-gradient(90deg, #0056b3, #520dc2);
+        }
+        #response {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #007bff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚗 Car Guru</h1>
+        <p>Ask your car-related questions below:</p>
+        
+        <input type="text" id="question" placeholder="Type your question..." />
+        <button onclick="askQuestion()">Ask</button>
+
+        <p id="response"></p>
+    </div>
+
+    <script>
+        async function askQuestion() {
+            let question = document.getElementById("question").value;
+            let responseElement = document.getElementById("response");
+
+            if (question.trim() === "") {
+                responseElement.innerText = "⚠️ Please enter a question!";
+                return;
+            }
+
+            responseElement.innerText = "🤖 Thinking...";
+            
+            let response = await fetch("/ask", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ question: question })
+            });
+
+            let data = await response.json();
+            responseElement.innerText = "🚗 Car Guru: " + data.answer;
+        }
+    </script>
+</body>
+</html>
