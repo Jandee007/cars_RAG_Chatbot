@@ -87,6 +87,7 @@
 
 หน้าหลักของแอปพลิเคชันจะแสดงฟอร์มให้ผู้ใช้กรอกคำถามเกี่ยวกับรถยนต์ จากนั้นระบบจะค้นหาคำตอบและแสดงผลลัพธ์ให้ผู้ใช้ทราบ.
 
-![image](https://github.com/user-attachments/assets/db151ab8-c92b-48ea-9548-4c8180e92142)
+![image](https://github.com/user-attachments/assets/3e7fee59-152f-42a1-9f10-29d6f5721609)
+
 
 
